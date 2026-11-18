@@ -6,16 +6,26 @@ void clear_display()
     // \033[H Moves the cursor to topleft.
     // \033[J clears the screen from cursor down to the end of the screen buffer.
     printf("\033[H\033[J");
+    fflush(stdout);
 }
 
-void render_display(int matrix[WIDTH][HEIGHT])
+void reset_cursor(void)
 {
-    for(int i = 0; i < HEIGHT; i++)
+    printf("\033[H");
+}
+
+void render_display(int *matrix, int width, int height)
+{
+    if (!matrix || width <= 0 || height <= 0)
+        return;
+
+    for(int y = 0; y < height; y++)
     {
-        for(int j = 0; j < WIDTH; j++)
+        for(int x = 0; x < width; x++)
         {
-            // printf("%d", matrix[i][j]);
-            if (matrix[i][j] == 1)
+            int index = y * width + x;
+
+            if (matrix[index] == 1)
                 printf("#");  // Alive
             else
                 printf(".");
@@ -23,4 +33,5 @@ void render_display(int matrix[WIDTH][HEIGHT])
         printf("\n");
     }
     printf("\n");
+    fflush(stdout);
 }

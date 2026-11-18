@@ -13,8 +13,8 @@ static int set_console_dimensions(int *width, int *height)
     if (!GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info))
         return -1;
 
-    *width = info.srWindow.Right - info.srWindow.Left + 1;
-    *height = info.srWindow.Bottom - info.srWindow.Top + 1;
+    *width = info.srWindow.Right - info.srWindow.Left - 1;
+    *height = info.srWindow.Bottom - info.srWindow.Top - 1;
 
     return 0;
 }
@@ -31,8 +31,8 @@ static int set_console_dimensions(int *width, int* height)
     if(ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1)
         return -1;
 
-    *width = ws.ws_col;
-    *height = ws.ws_row;
+    *width = ws.ws_col - 1;
+    *height = ws.ws_row - 1;
 
     return 0;
 }
@@ -125,7 +125,7 @@ void swap_boards(Board* board)
         return;
 
     int* temp = board->current;
-    
+
     board->current = board->next;
     board->next = temp;
 }

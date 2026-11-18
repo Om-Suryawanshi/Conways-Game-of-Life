@@ -1,7 +1,6 @@
 #include "display.h"
 
-int main(int argv, char** argv[])
+int main(int argc, char** argv)
 {
-	clear();
 	return 0;
 }

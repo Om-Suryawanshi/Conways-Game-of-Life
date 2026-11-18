@@ -1,14 +1,14 @@
 #include "display.h"
 #include <stdio.h>
 
-void clear()
+void clear_display()
 {
     // \033[H Moves the cursor to topleft.
     // \033[J clears the screen from cursor down to the end of the screen buffer.
     printf("\033[H\033[J");
 }
 
-void render(int matrix[WIDTH][HEIGHT])
+void render_display(int matrix[WIDTH][HEIGHT])
 {
     for(int i = 0; i < HEIGHT; i++)
     {
